@@ -23,6 +23,15 @@ streampos = fpos[mbstate_t]
 class ios_base:
    # openmode
    openmode = NewType("openmode", int)
+   app   : openmode
+   binary: openmode
+
+   in_   : openmode
+   out   : openmode
+
+   trunc : openmode
+   ate   : openmode
+
    # fmtflags
    fmtflags = NewType("fmtflags", int)
    dec        : fmtflags
@@ -37,7 +46,7 @@ class ios_base:
 
    scientific : fmtflags
    fixed      : fmtflags
-   floatfield : scientific | fixed
+   floatfield : fmtflags
 
    boolalpha  : fmtflags
    showbase   : fmtflags
@@ -46,4 +55,22 @@ class ios_base:
    skipws     : fmtflags
    unitbuf    : fmtflags
    uppercase  : fmtflags
-   __fmtmask__: fmtflags = all_set()
+
+   # iostate
+   iostate = NewType("iostate", int)
+
+   goodbit: iostate
+   badbit : iostate
+   failbit: iostate
+   eofbit : iostate
+
+   # seekdir
+   seekdir = NewType("seekdir", int)
+   beg: seekdir
+   end: seekdir
+   cur: seekdir
+
+   # other
+   streamsize = NewType("streamsize", int)
+
+   

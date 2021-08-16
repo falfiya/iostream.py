@@ -1,71 +1,69 @@
 from __future__ import annotations
 from typing import *
-from bitfield_iota import all_set, iota
+from ..bitfield_iota import bitfield_iota
 from .iosfwd import ios_base
 
 class ios_base(ios_base):
    # openmode
    openmode = super().openmode
-   iota.reset(1)
+   with bitfield_iota[openmode]() as iota:
+      app    = iota()
+      binary = iota()
 
-   app   : openmode = iota()
-   binary: openmode = iota()
+      in_    = iota()
+      out    = iota()
 
-   in_   : openmode = iota()
-   out   : openmode = iota()
+      trunc  = iota()
+      ate    = iota()
 
-   trunc : openmode = iota()
-   ate   : openmode = iota()
-
-   __openmask__: openmode = all_set()
+      __openmask__ = iota.all()
 
    # fmtflags
    fmtflags = super().fmtflags
-   iota.reset(1)
+   with bitfield_iota[fmtflags]() as iota:
+      dec         = iota()
+      oct         = iota()
+      hex         = iota()
+      basefield   = dec | oct | hex
 
-   dec        : fmtflags = iota()
-   oct        : fmtflags = iota()
-   hex        : fmtflags = iota()
-   basefield  : fmtflags = dec | oct | hex
+      left        = iota()
+      right       = iota()
+      internal    = iota()
+      adjustfield = left | right | internal
 
-   left       : fmtflags = iota()
-   right      : fmtflags = iota()
-   internal   : fmtflags = iota()
-   adjustfield: fmtflags = left | right | internal
+      scientific  = iota()
+      fixed       = iota()
+      floatfield  = scientific | fixed
 
-   scientific : fmtflags = iota()
-   fixed      : fmtflags = iota()
-   floatfield : fmtflags = scientific | fixed
+      boolalpha   = iota()
+      showbase    = iota()
+      showpoint   = iota()
+      showpos     = iota()
+      skipws      = iota()
+      unitbuf     = iota()
+      uppercase   = iota()
 
-   boolalpha  : fmtflags = iota()
-   showbase   : fmtflags = iota()
-   showpoint  : fmtflags = iota()
-   showpos    : fmtflags = iota()
-   skipws     : fmtflags = iota()
-   unitbuf    : fmtflags = iota()
-   uppercase  : fmtflags = iota()
-   __fmtmask__: fmtflags = all_set()
+      __fmtmask__: fmtflags = iota.all()
 
    # iostate
-   iostate = NewType("iostate", int)
-   iota.reset(0)
+   iostate = super().iostate
+   with bitfield_iota[iostate]() as iota:
+      goodbit = iota()
+      badbit  = iota()
+      failbit = iota()
+      eofbit  = iota()
 
-   goodbit: iostate = iota()
-   badbit : iostate = iota()
-   failbit: iostate = iota()
-   eofbit : iostate = iota()
-
-   __statemask__: ios_base = all_set()
+      __statemask__: ios_base = iota.all()
 
    # seekdir
-   seekdir = NewType("seekdir", int)
-   iota.reset(0)
-   beg: seekdir = iota()
-   end: seekdir = iota()
-   cur: seekdir = iota()
+   seekdir = super().seekdir
+   with bitfield_iota[seekdir]() as iota:
+      beg = iota()
+      end = iota()
+      cur = iota()
 
    # other
-   streamsize = NewType("streamsize", int)
+   streamsize = super().streamsize
 
    def __init__(self):
       self.__openmode__ : ios_base.openmode   = 0
