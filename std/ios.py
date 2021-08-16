@@ -1,10 +1,11 @@
 from __future__ import annotations
 from typing import *
 from bitfield_iota import all_set, iota
+from .iosfwd import ios_base
 
-class ios_base:
+class ios_base(ios_base):
    # openmode
-   openmode = NewType("openmode", int)
+   openmode = super().openmode
    iota.reset(1)
 
    app   : openmode = iota()
@@ -19,7 +20,7 @@ class ios_base:
    __openmask__: openmode = all_set()
 
    # fmtflags
-   fmtflags = NewType("fmtflags", int)
+   fmtflags = super().fmtflags
    iota.reset(1)
 
    dec        : fmtflags = iota()
@@ -34,22 +35,15 @@ class ios_base:
 
    scientific : fmtflags = iota()
    fixed      : fmtflags = iota()
-   floatfield : scientific | fixed
+   floatfield : fmtflags = scientific | fixed
 
    boolalpha  : fmtflags = iota()
-
    showbase   : fmtflags = iota()
-
    showpoint  : fmtflags = iota()
-
    showpos    : fmtflags = iota()
-
    skipws     : fmtflags = iota()
-
    unitbuf    : fmtflags = iota()
-
    uppercase  : fmtflags = iota()
-
    __fmtmask__: fmtflags = all_set()
 
    # iostate
@@ -130,5 +124,4 @@ class ios_base:
       def __init__(self):
          self.__constructor__(self)
 
-for key in dir(ios_base):
-   print(f"ios_base::{key} = {getattr(ios_base, key)}")
+
