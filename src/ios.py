@@ -1,11 +1,13 @@
 from __future__ import annotations
 from typing import *
-from ..bitfield_iota import bitfield_iota
+from ._cxx_semantics import implement
+from ._bitfield_iota import bitfield_iota
 from .iosfwd import ios_base
 
-class ios_base(ios_base):
+@implement
+class ios_base:
    # openmode
-   openmode = super().openmode
+   openmode = NewType("openmode", int)
    with bitfield_iota[openmode]() as iota:
       app    = iota()
       binary = iota()
@@ -19,7 +21,7 @@ class ios_base(ios_base):
       __openmask__ = iota.all()
 
    # fmtflags
-   fmtflags = super().fmtflags
+   fmtflags = NewType("fmtflags", int)
    with bitfield_iota[fmtflags]() as iota:
       dec         = iota()
       oct         = iota()
@@ -46,7 +48,7 @@ class ios_base(ios_base):
       __fmtmask__: fmtflags = iota.all()
 
    # iostate
-   iostate = super().iostate
+   iostate = NewType("iostate", int)
    with bitfield_iota[iostate]() as iota:
       goodbit = iota()
       badbit  = iota()
@@ -56,14 +58,14 @@ class ios_base(ios_base):
       __statemask__: ios_base = iota.all()
 
    # seekdir
-   seekdir = super().seekdir
+   seekdir = NewType("seekdir", int)
    with bitfield_iota[seekdir]() as iota:
       beg = iota()
       end = iota()
       cur = iota()
 
    # other
-   streamsize = super().streamsize
+   streamsize = NewType("streamsize", int)
 
    def __init__(self):
       self.__openmode__ : ios_base.openmode   = 0
@@ -121,5 +123,3 @@ class ios_base(ios_base):
 
       def __init__(self):
          self.__constructor__(self)
-
-

@@ -1,4 +1,5 @@
-from typing import *
+from typing import Type, TypeVar
+from sys import _getframe
 
 T = TypeVar('T')
 
@@ -33,3 +34,13 @@ def specialize(s12n: T) -> T:
          s13s[args] = self
    setattr(specialized, MAGIC_ATTR, None)
    return specialized
+
+def implement(actual):
+   def decorator(cls: Type[T]) -> Type[T]:
+      for k, v in cls.__dict__.items():
+         if k != "__dict__":
+            setattr(actual, k, v)
+      return actual
+   return decorator
+
+from typing import *
