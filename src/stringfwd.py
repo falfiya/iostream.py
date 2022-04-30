@@ -1,8 +1,6 @@
-from typing import TypeVar, Generic
-from _cxxpy import template
+from .cuchar import mbstate_t
+from .iosfwd import streamoff
 
-CharT = TypeVar("CharT")
-
-@template
-class char_traits(Generic[CharT]):
-   ...
+class char_traits__:
+   off_type = streamoff
+   state_type = mbstate_t
