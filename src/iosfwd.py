@@ -1,6 +1,6 @@
 from __future__ import annotations
 from .sup import *
-from .stringfwd import *
+from .stringfwd import char_traits__
 from .bitfield_iota import bitfield_iota
 
 streamoff: Type[int] = int
@@ -108,7 +108,6 @@ class ios_base:
       self.__seekdir__  : ios_base.seekdir    = 0
       self.__precision__: ios_base.streamsize = 6
       self.__width__    : ios_base.streamsize = 0
-      self.__except__   : ios_base.iostate    = ios_base.goodbit
 
    def flags(self, new_flags: Optional[fmtflags] = None) -> fmtflags:
       old_flags = self.__fmtflags__
@@ -150,3 +149,5 @@ class ios_base:
       return old_width
 
    class failure(SystemError): ...
+
+class basic_ostream__: ...

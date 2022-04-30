@@ -1,10 +1,7 @@
-from inspect import currentframe
 from typing import *
+from inspect import currentframe
+from .type_traits import typeof
 
-T = TypeVar('T')
-
-# steal the type of overload
-def typeof(x: T) -> Type[T]: ...
 __overload_t = typeof(overload)
 
 class OverloadError(SystemError): ...

@@ -1,5 +1,3 @@
 from typing import *
-from .cxx_overloadable import *
-
-char = NewType("char", int)
-
+from .supfwd import char
+from .cxx_overloadable import cxx_overloadable, cxx_overload

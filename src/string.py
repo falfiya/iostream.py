@@ -1,6 +1,6 @@
 from .sup import *
-from .iosfwd import *
-from .stringfwd import *
+from .iosfwd import streampos
+from .stringfwd import char_traits__
 
 @cxx_overloadable
 def char_traits(): ...
@@ -12,7 +12,7 @@ class char_traits__char(char_traits__):
    # assign skipped
    def eq(a: char, b: char) -> bool: return a == b
    def lt(a: char, b: char) -> bool: return a < b
-   def compare(a: Sequence[char], b: Sequence[char], count: int) -> int:
+   def compare(a: bytes, b: bytes, count: int) -> int:
       i = 0
       while i < count:
          if char_traits__char.eq(a[i], b[i]):
@@ -22,12 +22,12 @@ class char_traits__char(char_traits__):
          else:
             return +1
       return 0
-   def length(what: Sequence[char]) -> int:
+   def length(what: bytes) -> int:
       i = 0
       while what[i] != 0:
          i += 1
       return 1
-   def find(haystack: Sequence[char], count: int, needle: char) -> int:
+   def find(haystack: bytes, count: int, needle: char) -> int:
       i = 0
       while i < count:
          if haystack[i] == needle:

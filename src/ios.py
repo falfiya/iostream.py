@@ -1,10 +1,16 @@
-from .iosfwd import *
-from .string import *
+from .sup import *
+from .iosfwd import basic_ostream__, ios_base
+from .string import char_traits
 
 @cxx_overloadable
 def basic_ios(): ...
 
-class basic_ios__(ios_base):
+class basic_ios__:
+   def __init__(self):
+      super().__init__(self)
+      self.__except__: ios_base.iostate = ios_base.goodbit
+      self.__tied_to__: Optional[basic_ostream__] = None
+      self.__buf__: bytearray = bytearray(1024) # needs to be basic streambuf
    def good(self) -> bool:
       return self.rdstate() == ios_base.goodbit
    def eof(self) -> bool:
@@ -33,9 +39,16 @@ class basic_ios__(ios_base):
          self.__except__ = Except & ios_base.__statemask__
    def imbue(self):
       raise ValueError("Hell No.")
+   @overload
+   def tie(self) -> basic_ostream__: ...
+   @overload
+   def tie(self, to: basic_ostream__) -> basic_ostream__: ...
+   def tie(self, to: Optional[basic_ostream__]):
+      if to is not None:
+         self.__tied_to__ = to
+      return self.__tied_to__
 
-
-class basic_ios__char(ios_base):
+class basic_ios__char(basic_ios__):
    Traits = char_traits(char)
 
 @cxx_overload([char], basic_ios__char)
