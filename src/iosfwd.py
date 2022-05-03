@@ -1,4 +1,3 @@
-from __future__ import annotations
 from .sup import *
 from .stringfwd import char_traits__
 from .bitfield_iota import bitfield_iota
@@ -7,7 +6,6 @@ streamoff: Type[int] = int
 
 StateType = TypeVar("StateType")
 class fpos(Generic[StateType]):
-   self_t: Type[fpos[StateType]] = None
    def __init__(self, state: StateType, off: streamoff = 0):
       self.__state: StateType = state
       self.__offset: streamoff = off
@@ -20,21 +18,21 @@ class fpos(Generic[StateType]):
          return self
       else:
          self.__state = maybe_state
-   def __add__(self, off: streamoff) -> self_t:
+   def __add__(self, off: streamoff) -> Self:
       return fpos(self.state, self.__offset + off)
-   def __sub__(self, off: streamoff) -> self_t:
+   def __sub__(self, off: streamoff) -> Self:
       return fpos(self.state, self.__offset - off)
-   def __iadd__(self, off: streamoff) -> self_t:
+   def __iadd__(self, off: streamoff) -> Self:
       self.__offset += off
       return self
-   def __isub__(self, off: streamoff) -> self_t:
+   def __isub__(self, off: streamoff) -> Self:
       self.__offset -= off
       return self
-   def __eq__(self, other: self_t) -> bool:
+   def __eq__(self, other: Self) -> bool:
       return (True
          and self.__state == other.__state
          and self.__offset == other.__offset)
-   def __ne__(self, other: self_t) -> bool:
+   def __ne__(self, other: Self) -> bool:
       return not self == other
 
 streampos = fpos[char_traits__.state_type]
@@ -89,7 +87,7 @@ class ios_base:
       failbit = iota()
       eofbit  = iota()
 
-      __statemask__: ios_base = iota.all()
+      __statemask__: iostate = iota.all()
 
    # seekdir
    seekdir = NewType("seekdir", int)

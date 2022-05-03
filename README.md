@@ -4,6 +4,12 @@
 
 *Because we can, we must.*
 
-Turns out we can't. At least not to the degree I wanted.
-I basically have to reimplement the semantics of C++'s template classes before
-I can properly match the API as it's specified.
+The typing only works under Pylance and not MyPy.
+Originally, I was bummed out over this fact but then I realized that it's all
+cursed anyways.
+
+```py
+import std
+
+std.cout << "Hello, World!" << std.endl
+```
