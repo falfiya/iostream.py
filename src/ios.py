@@ -2,10 +2,8 @@ from .sup import *
 from .iosfwd import basic_ostream__, ios_base
 from .string import char_traits
 
-@cxx_overloadable
-def basic_ios(): ...
-
-class basic_ios__:
+class basic_ios:
+   Traits = char_traits
    def __init__(self):
       super().__init__(self)
       self.__except__: ios_base.iostate = ios_base.goodbit
@@ -37,8 +35,6 @@ class basic_ios__:
          return self.__except__
       else:
          self.__except__ = Except & ios_base.__statemask__
-   def imbue(self):
-      raise ValueError("Hell No.")
    @overload
    def tie(self) -> basic_ostream__: ...
    @overload
@@ -48,10 +44,4 @@ class basic_ios__:
          self.__tied_to__ = to
       return self.__tied_to__
 
-class basic_ios__char(basic_ios__):
-   Traits = char_traits(char)
-
-@cxx_overload([char], basic_ios__char)
-def basic_ios(CharT: Type[char]) -> basic_ios__char: ...
-
-ios = basic_ios(char)
+ios = basic_ios

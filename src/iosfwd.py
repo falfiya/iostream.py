@@ -1,8 +1,9 @@
 from .sup import *
-from .stringfwd import char_traits__
 from .bitfield_iota import bitfield_iota
+from .string import char_traits
 
-streamoff: Type[int] = int
+streamoff = uint
+streamsize = uint
 
 StateType = TypeVar("StateType")
 class fpos(Generic[StateType]):
@@ -35,7 +36,7 @@ class fpos(Generic[StateType]):
    def __ne__(self, other: Self) -> bool:
       return not self == other
 
-streampos = fpos[char_traits__.state_type]
+streampos = fpos[char_traits.state_type]
 
 class ios_base:
    # openmode

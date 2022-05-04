@@ -1,6 +1,5 @@
 from typing import *
 from typing_extensions import Self
-from .cxx_overloadable import cxx_overloadable, cxx_overload
 
 class byte:
    def __new__(cls, either: Union[bytes, int]) -> Self:
@@ -16,3 +15,13 @@ class byte:
             raise ValueError(f"{either} is not a single byte!")
 
 char = NewType("char", byte)
+
+class uint:
+   def __new__(cls, idx: int) -> Self:
+      if idx < 0:
+         raise ValueError(f"{idx} must be a positive integer!")
+      return idx
+
+index = NewType("index", uint)
+
+T = TypeVar("T")
