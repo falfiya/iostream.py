@@ -2,14 +2,13 @@
 
 <img src="misc/icon.png" width="166px"/>
 
-*Because we can, we must.*
-
-The typing only works under Pylance and not MyPy.
-Originally, I was bummed out over this fact but then I realized that it's all
-cursed anyways.
+*The majestic iostream API — now with all the blazing speed of Python!*
 
 ```py
 import std
 
-std.cout << "Hello, World!" << std.endl
+x: int = 0
+std.cout << "Enter an integer:"
+std.cin >> x
+std.cout << "You entered " << x << std.endl
 ```
