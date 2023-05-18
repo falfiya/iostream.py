@@ -1,8 +1,8 @@
-# iostream.py
+# pyostream
 
 <img src="misc/icon.png" width="166px"/>
 
-*The majestic iostream API — now with all the blazing speed of Python!*
+*The majestic iostream API — now with the blazing speed of Python!*
 
 ```py
 import std
