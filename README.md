@@ -12,3 +12,13 @@ std.cout << "Enter an integer:"
 std.cin >> x
 std.cout << "You entered " << x << std.endl
 ```
+
+## API Docs
+
+### ios_base
+
+
+
+### basic_ostream
+
+### 

@@ -1,5 +1,5 @@
 from .sup import *
-from .string import char_traits
+from .char_traits import char_traits
 from .iosfwd import streamsize
 
 class basic_streambuf:

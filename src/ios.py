@@ -1,6 +1,8 @@
 from .sup import *
 from .iosfwd import basic_ostream__, ios_base
-from .string import char_traits
+from .char_traits import char_traits
+
+
 
 class basic_ios:
    Traits = char_traits

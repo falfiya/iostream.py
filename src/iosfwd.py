@@ -1,6 +1,6 @@
 from .sup import *
 from .bitfield_iota import bitfield_iota
-from .string import char_traits
+from .char_traits import char_traits
 
 streamoff = uint
 streamsize = uint
